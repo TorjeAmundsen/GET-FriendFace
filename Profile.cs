@@ -1,5 +1,4 @@
-﻿
-namespace FriendFace
+﻿namespace FriendFace
 {
     internal class Profile
     {

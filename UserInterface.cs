@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace FriendFace
+﻿namespace FriendFace
 {
     internal class UserInterface
     {
