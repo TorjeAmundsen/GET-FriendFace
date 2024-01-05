@@ -4,6 +4,7 @@
     {
         private List<Profile> _profiles;
         private Profile _currentUser;
+        private List<Profile> _profilesExcludingFriends => _profiles.Where((x) => !_currentUser.GetFriends().Contains(x)).ToList();
 
         public UserInterface(List<Profile> profiles, Profile currentUser)
         {
@@ -58,7 +59,7 @@
 
         public void AddNewFriendMenu()
         {
-            ListProfilesForMenu(_profiles);
+            ListProfilesForMenu(_profilesExcludingFriends);
             Console.WriteLine("Type a person's number to add a friend, or \"cancel\" to cancel.");
 
             string userInputRaw = Console.ReadLine();
@@ -76,7 +77,7 @@
             }
             else
             {
-                _currentUser.AddFriend(_profiles[userInputNumber - 1]);
+                _currentUser.AddFriend(_profilesExcludingFriends[userInputNumber - 1]);
             }
             MainMenu();
         }
@@ -123,7 +124,7 @@
                 switch (userInput)
                 {
                     case "1": ViewProfileLowerMenu(_currentUser.GetFriends()); break;
-                    case "2": ViewProfileLowerMenu(_profiles); break;
+                    case "2": ViewProfileLowerMenu(_profilesExcludingFriends); break;
                     default: Console.WriteLine("Invalid input! Try again.\n"); ViewProfileUpperMenu(); break;
                 }
             }
